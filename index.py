@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/index')
 def index():
     ar = ArticleRenderer()
-    return render_template(ar.RenderRequestedArticle('test.txt'))
+    return ar.RenderRequestedArticle('test.txt')
 
 if __name__ == "__main__":
     app.run()

@@ -11,5 +11,5 @@ class ArticleRenderer:
 
     def RenderRequestedArticle(self, requestedArticle : str):
         html = self.articleLoader.GetArticleHTML(requestedArticle)
-        return render_template(html)
+        return html
 
