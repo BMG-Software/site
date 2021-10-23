@@ -7,9 +7,9 @@ class ArticleRenderer:
 
     def __init__(self) -> None:
         self.articleLoader = ArticleLoader()
-        self.articleLoader.WatchForArticleChanges()
 
     def RenderRequestedArticle(self, requestedArticle : str):
+        self.articleLoader.CheckForNewArticles()
         html = self.articleLoader.GetArticleHTML(requestedArticle)
         return html
 

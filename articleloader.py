@@ -6,11 +6,17 @@ from markdown import markdown
 
 class ArticleLoader:
 
-    def __init__(self) -> None:
-        self.ARTICLES_DIR = '.\\articles'
-        self.CHECK_INTERVAL = 30.0 # Seconds
+    def __init__(self, articles_directory : str) -> None:
+        self.ARTICLES_DIR = articles_directory
         self.articleInfo = {}
         self.articleHTML = {}
+        self.CheckForNewArticles()
+
+    def GetArticleHTMLAll(self) -> dict:
+        retval = {}
+        for articleName, articleContent in self.articleHTML.items():
+            retval[articleName] = "<div>" + "<h2>" + articleName + "</h2>" + articleContent + "</div>"
+        return retval
 
     def GetArticleHTML(self, articleFilename : str) -> str:
         try:
@@ -28,6 +34,9 @@ class ArticleLoader:
     def LoadArticles(self, articlesDir : str) -> dict:
         articleInfo = {}
         articleNames = [f for f in listdir(articlesDir) if isfile(join(articlesDir, f))]
+
+        print(articleNames)
+
         for articleName in articleNames:
             articleInfo[articleName] = getmtime(join(articlesDir, articleName))        
         return articleInfo
@@ -54,8 +63,7 @@ class ArticleLoader:
 
         return toDelete
 
-    def WatchForArticleChanges(self) -> None:
-        threading.Timer(self.CHECK_INTERVAL, self.WatchForArticleChanges).start()
+    def CheckForNewArticles(self) -> None:
         latestArticles = self.LoadArticles(self.ARTICLES_DIR)
         toAdd = self.CheckForAdditions(latestArticles)
         if len(toAdd) > 0:
@@ -66,7 +74,6 @@ class ArticleLoader:
             for f in toDelete:
                 print(f)
         self.articleInfo = latestArticles
-        return self.articleHTML
         
 
 if __name__ == "__main__":

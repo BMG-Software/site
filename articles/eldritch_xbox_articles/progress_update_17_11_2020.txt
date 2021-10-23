@@ -1,0 +1,3 @@
+<p>Porting begins.</br></br> Cloned the base Eldritch repo. First step, get the visual studio project up to date (I’m using VS 2017). Solution retargeted. My aim is to build eldritch with SDL2 and hopefully (fingers crossed) back port it to opengles2 which the lovely emscripten UWP SDL2 supports.</br> I’m interested in pursuing it that way and seeing how far I get as I have some experience with opengl, and a decent amount with SDL2 so I think it’s best to start somewhere familiar. </br>Working on building the standard SDL2 version on Windows so I have a base to start with. Once that works I’ll get a solid commit for the build as a nice backup.</p>
+
+
